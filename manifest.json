@@ -1,0 +1,18 @@
+{
+  "name": "HabitFlow — трекер привычек",
+  "short_name": "HabitFlow",
+  "description": "Трекер привычек с блокировкой телефона, статистикой и геймификацией",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f7f5",
+  "theme_color": "#111111",
+  "orientation": "portrait",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%23111'/%3E%3Cpath d='M150 268l76 76 140-150' fill='none' stroke='%23fff' stroke-width='44' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
