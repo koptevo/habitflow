@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Трекер привычек — Black & White</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Шапка -->
+    <header class="app-header">
+      <div class="app-header__title">Трекер привычек</div>
+      <div class="app-header__subtitle">Black & White Edition</div>
+      <button class="app-header__settings" aria-label="Настройки">⚙️</button>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="app-main">
+      <!-- Добавление привычки -->
+      <section class="habit-add-section">
+        <h2 class="visually-hidden">Добавить привычку</h2>
+        <form class="habit-add-form" id="habitForm">
+          <div class="form-row">
+            <input type="text" class="form-input" id="habitName" placeholder="Название привычки" required>
+            <select class="form-select" id="habitPeriod">
+              <option value="morning">Утро</option>
+              <option value="day">День</option>
+              <option value="evening">Вечер</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <input type="number" class="form-input" id="habitTime" placeholder="Время (минуты)" min="1" max="1440" value="60">
+            <label class="form-label" for="habitTime">минут на блокировку</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+      </section>
+
+      <!-- Список привычек -->
+      <section class="habits-list" id="habitsList">
+        <p class="empty-state" id="emptyState">Начните с добавления первой привычки</p>
+      </section>
+    </main>
+
+    <!-- Нижняя панель -->
+    <footer class="app-footer">
+      <div class="footer-stats">
+        <div class="stat-item">
+          <span class="stat-value" id="currentStreak">0</span>
+          <span class="stat-label">стрик</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="completionRate">0%</span>
+          <span class="stat-label">выполнено</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="totalHabits">0</span>
+          <span class="stat-label">привычек</span>
+        </div>
+      </div>
+      <button class="btn btn-secondary footer-btn" id="resetBtn">Сбросить все</button>
+    </footer>
+  </div>
+
+  <!-- Модальное блокировки -->
+  <div class="modal modal--locked" id="lockModal" aria-hidden="true">
+    <div class="modal__content">
+      <div class="modal__icon">🚫</div>
+      <h2 class="modal__title">Привычка не выполнена</h2>
+      <p class="modal__text">Вы не отметили привычку <strong id="lockedHabitName"></strong>. Телефон заблокирован на <strong id="lockDuration"></strong> минут(ы).</p>
+      <p class="modal__info">Это поможет вам не пропускать привычки в будущем.</p>
+      <button class="btn btn-primary modal__btn" id="confirmLock">Понятно</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
