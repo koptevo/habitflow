@@ -1,669 +1,314 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="mono">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Мне Букет — цветочная мастерская на Беломорской</title>
-<meta name="description" content="Монобукеты и авторские композиции с доставкой по району. Собираем при вас, показываем фото перед отправкой, везём от 1 часа.">
-<meta name="theme-color" content="#FAF6F2">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23FAF6F2'/%3E%3Cg fill='%23B5455A'%3E%3Cellipse cx='30' cy='17' rx='7' ry='12'/%3E%3Cellipse cx='30' cy='43' rx='7' ry='12'/%3E%3Cellipse cx='17' cy='30' rx='12' ry='7'/%3E%3Cellipse cx='43' cy='30' rx='12' ry='7'/%3E%3C/g%3E%3Ccircle cx='30' cy='30' r='6' fill='%23221E1B'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#111111">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>HabitFlow — трекер привычек</title>
+  <meta name="description" content="Трекер привычек с блокировкой телефона, статистикой и геймификацией">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- ============ SVG SPRITE ============ -->
-<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="wrap-a" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F6EFE7"/><stop offset="1" stop-color="#E6D8CA"/>
-    </linearGradient>
-    <linearGradient id="wrap-b" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F2E7E9"/><stop offset="1" stop-color="#DCC7CC"/>
-    </linearGradient>
-    <linearGradient id="wrap-dark" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2E2926"/><stop offset="1" stop-color="#171412"/>
-    </linearGradient>
-
-    <symbol id="petal8" viewBox="0 0 60 60">
-      <g fill="currentColor">
-        <ellipse cx="30" cy="12" rx="8.6" ry="15"/>
-        <ellipse cx="30" cy="12" rx="8.6" ry="15" transform="rotate(45 30 30)"/>
-        <ellipse cx="30" cy="12" rx="8.6" ry="15" transform="rotate(90 30 30)"/>
-        <ellipse cx="30" cy="12" rx="8.6" ry="15" transform="rotate(135 30 30)"/>
-        <ellipse cx="30" cy="12" rx="8.6" ry="15" transform="rotate(180 30 30)"/>
-        <ellipse cx="30" cy="12" rx="8.6" ry="15" transform="rotate(225 30 30)"/>
-        <ellipse cx="30" cy="12" rx="8.6" ry="15" transform="rotate(270 30 30)"/>
-        <ellipse cx="30" cy="12" rx="8.6" ry="15" transform="rotate(315 30 30)"/>
-      </g>
-    </symbol>
-
-    <symbol id="petal6" viewBox="0 0 60 60">
-      <g fill="currentColor">
-        <ellipse cx="30" cy="14" rx="9" ry="14"/>
-        <ellipse cx="30" cy="14" rx="9" ry="14" transform="rotate(60 30 30)"/>
-        <ellipse cx="30" cy="14" rx="9" ry="14" transform="rotate(120 30 30)"/>
-        <ellipse cx="30" cy="14" rx="9" ry="14" transform="rotate(180 30 30)"/>
-        <ellipse cx="30" cy="14" rx="9" ry="14" transform="rotate(240 30 30)"/>
-        <ellipse cx="30" cy="14" rx="9" ry="14" transform="rotate(300 30 30)"/>
-      </g>
-    </symbol>
-
-    <symbol id="leaf" viewBox="0 0 40 20">
-      <path d="M1 10C9 -1 30 -1 39 10 30 21 9 21 1 10Z" fill="currentColor"/>
-      <path d="M3 10H37" stroke="rgba(0,0,0,.12)" stroke-width="1" fill="none"/>
-    </symbol>
-
-    <!-- Пионовый -->
-    <symbol id="bq-pink" viewBox="0 0 240 290">
-      <ellipse cx="120" cy="272" rx="58" ry="9" fill="rgba(60,40,35,.07)"/>
-      <g stroke="#6E8064" stroke-width="2.6" fill="none" stroke-linecap="round">
-        <path d="M120 235 74 150"/><path d="M120 235 96 128"/><path d="M120 235 122 118"/>
-        <path d="M120 235 152 132"/><path d="M120 235 172 156"/>
-      </g>
-      <g color="#8C9A7E" opacity=".95">
-        <use href="#leaf" x="52" y="176" width="34" height="17" transform="rotate(-28 69 184)"/>
-        <use href="#leaf" x="160" y="188" width="34" height="17" transform="rotate(24 177 196)"/>
-        <use href="#leaf" x="120" y="150" width="30" height="15" transform="rotate(-8 135 157)"/>
-      </g>
-      <path d="M76 168C64 200 60 242 70 264L170 264C180 242 176 200 164 168Z" fill="url(#wrap-a)"/>
-      <path d="M76 168C96 188 144 188 164 168" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="2"/>
-      <path d="M118 176 120 264" stroke="rgba(120,95,80,.18)" stroke-width="1.4"/>
-      <g transform="translate(74 146)"><use href="#petal8" x="-31" y="-31" width="62" height="62" color="#F0C2CC"/><use href="#petal8" x="-21" y="-21" width="42" height="42" color="#E3A2B0" transform="rotate(22)"/><circle r="8" fill="#BC6E84"/></g>
-      <g transform="translate(104 104)"><use href="#petal8" x="-34" y="-34" width="68" height="68" color="#F6D2D8"/><use href="#petal8" x="-23" y="-23" width="46" height="46" color="#E8AEBA" transform="rotate(22)"/><circle r="9" fill="#C4798C"/></g>
-      <g transform="translate(150 118)"><use href="#petal8" x="-30" y="-30" width="60" height="60" color="#EFC0CA"/><use href="#petal8" x="-20" y="-20" width="40" height="40" color="#DF9DAC" transform="rotate(22)"/><circle r="8" fill="#B96B80"/></g>
-      <g transform="translate(122 152)"><use href="#petal8" x="-26" y="-26" width="52" height="52" color="#F2C8D0"/><use href="#petal8" x="-17" y="-17" width="34" height="34" color="#E1A2AE" transform="rotate(22)"/><circle r="6.5" fill="#B96B80"/></g>
-      <g transform="translate(172 150)"><use href="#petal6" x="-24" y="-24" width="48" height="48" color="#F8E4E8"/><use href="#petal6" x="-16" y="-16" width="32" height="32" color="#EFC9D2" transform="rotate(30)"/><circle r="6" fill="#D9A6B2"/></g>
-      <g transform="translate(58 178)"><use href="#petal6" x="-20" y="-20" width="40" height="40" color="#F8E4E8"/><circle r="5" fill="#D9A6B2"/></g>
-    </symbol>
-
-    <!-- Белый сад -->
-    <symbol id="bq-white" viewBox="0 0 240 290">
-      <ellipse cx="120" cy="272" rx="56" ry="9" fill="rgba(60,40,35,.07)"/>
-      <g stroke="#7C8B6E" stroke-width="2.6" fill="none" stroke-linecap="round">
-        <path d="M120 235 80 152"/><path d="M120 235 104 126"/><path d="M120 235 130 112"/><path d="M120 235 158 140"/>
-      </g>
-      <g color="#93A184">
-        <use href="#leaf" x="44" y="164" width="36" height="18" transform="rotate(-38 62 173)"/>
-        <use href="#leaf" x="166" y="170" width="36" height="18" transform="rotate(30 184 179)"/>
-        <use href="#leaf" x="60" y="196" width="32" height="16" transform="rotate(-16 76 204)"/>
-        <use href="#leaf" x="152" y="202" width="32" height="16" transform="rotate(14 168 210)"/>
-      </g>
-      <g fill="#A9B79A" opacity=".9">
-        <circle cx="52" cy="150" r="5"/><circle cx="44" cy="164" r="4"/><circle cx="60" cy="138" r="4"/>
-        <circle cx="184" cy="140" r="5"/><circle cx="192" cy="154" r="4"/><circle cx="178" cy="128" r="4"/>
-      </g>
-      <path d="M78 170C66 202 64 242 72 264L168 264C176 242 174 202 162 170Z" fill="url(#wrap-a)"/>
-      <path d="M78 170C98 190 142 190 162 170" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2"/>
-      <path d="M112 178 106 264M132 178 140 264" stroke="rgba(120,95,80,.14)" stroke-width="1.3"/>
-      <g transform="translate(84 152)"><use href="#petal8" x="-29" y="-29" width="58" height="58" color="#FFF7EC"/><use href="#petal8" x="-19" y="-19" width="38" height="38" color="#F3E5D2" transform="rotate(22)"/><circle r="7.5" fill="#D9C3A2"/></g>
-      <g transform="translate(120 112)"><use href="#petal8" x="-33" y="-33" width="66" height="66" color="#FFFAF2"/><use href="#petal8" x="-22" y="-22" width="44" height="44" color="#F1E2CE" transform="rotate(22)"/><circle r="8.5" fill="#D6BE9C"/></g>
-      <g transform="translate(158 146)"><use href="#petal8" x="-27" y="-27" width="54" height="54" color="#FFF8EE"/><use href="#petal8" x="-18" y="-18" width="36" height="36" color="#EFDFC9" transform="rotate(22)"/><circle r="7" fill="#D6BE9C"/></g>
-      <g transform="translate(112 164)"><use href="#petal6" x="-22" y="-22" width="44" height="44" color="#FBF3E4"/><circle r="5.5" fill="#DCC8A8"/></g>
-      <g transform="translate(150 186)"><use href="#petal6" x="-18" y="-18" width="36" height="36" color="#F7EDDB"/><circle r="4.5" fill="#DCC8A8"/></g>
-    </symbol>
-
-    <!-- Солнечный -->
-    <symbol id="bq-sun" viewBox="0 0 240 290">
-      <ellipse cx="120" cy="272" rx="56" ry="9" fill="rgba(60,40,35,.07)"/>
-      <g stroke="#6E8064" stroke-width="2.6" fill="none" stroke-linecap="round">
-        <path d="M120 235 78 154"/><path d="M120 235 100 124"/><path d="M120 235 134 116"/><path d="M120 235 164 148"/>
-      </g>
-      <g color="#8C9A7E">
-        <use href="#leaf" x="46" y="180" width="34" height="17" transform="rotate(-30 63 188)"/>
-        <use href="#leaf" x="164" y="176" width="34" height="17" transform="rotate(26 181 184)"/>
-        <use href="#leaf" x="112" y="146" width="30" height="15" transform="rotate(-6 127 153)"/>
-      </g>
-      <path d="M80 172C68 204 66 242 74 264L166 264C174 242 172 204 160 172Z" fill="url(#wrap-a)"/>
-      <path d="M80 172C100 192 140 192 160 172" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2"/>
-      <path d="M120 182 120 264" stroke="rgba(120,95,80,.16)" stroke-width="1.3"/>
-      <g transform="translate(80 154)"><use href="#petal8" x="-28" y="-28" width="56" height="56" color="#FBE3A6"/><use href="#petal8" x="-18" y="-18" width="36" height="36" color="#F2C96F" transform="rotate(22)"/><circle r="7" fill="#D79B3E"/></g>
-      <g transform="translate(120 108)"><use href="#petal8" x="-33" y="-33" width="66" height="66" color="#FFEFC2"/><use href="#petal8" x="-22" y="-22" width="44" height="44" color="#F5CE72" transform="rotate(22)"/><circle r="8.5" fill="#CF9330"/></g>
-      <g transform="translate(162 146)"><use href="#petal8" x="-26" y="-26" width="52" height="52" color="#FCE7B2"/><use href="#petal8" x="-17" y="-17" width="34" height="34" color="#EFC066" transform="rotate(22)"/><circle r="6.5" fill="#CF9330"/></g>
-      <g transform="translate(112 160)"><use href="#petal6" x="-22" y="-22" width="44" height="44" color="#FFF4D6"/><use href="#petal6" x="-13" y="-13" width="26" height="26" color="#F6D98F" transform="rotate(30)"/><circle r="4.5" fill="#D9A64A"/></g>
-      <g transform="translate(50 190)"><use href="#petal6" x="-17" y="-17" width="34" height="34" color="#FDF1CE"/><circle r="4" fill="#D9A64A"/></g>
-    </symbol>
-
-    <!-- Бордо -->
-    <symbol id="bq-red" viewBox="0 0 240 290">
-      <ellipse cx="120" cy="274" rx="62" ry="9" fill="rgba(60,40,35,.09)"/>
-      <g stroke="#5E6E55" stroke-width="2.6" fill="none" stroke-linecap="round">
-        <path d="M120 240 88 164"/><path d="M120 240 108 140"/><path d="M120 240 138 138"/><path d="M120 240 158 168"/>
-      </g>
-      <g color="#7B8A6C">
-        <use href="#leaf" x="132" y="196" width="36" height="18" transform="rotate(18 150 205)"/>
-        <use href="#leaf" x="58" y="188" width="34" height="17" transform="rotate(-30 75 196)"/>
-      </g>
-      <path d="M96 196 L144 196 L152 266 L88 266 Z" fill="url(#wrap-dark)"/>
-      <path d="M96 196 L144 196 L146 210 L94 210 Z" fill="rgba(255,255,255,.08)"/>
-      <g transform="translate(88 156)"><use href="#petal8" x="-30" y="-30" width="60" height="60" color="#C25663"/><use href="#petal8" x="-20" y="-20" width="40" height="40" color="#98293C" transform="rotate(22)"/><circle r="7" fill="#6B1424"/></g>
-      <g transform="translate(120 128)"><use href="#petal8" x="-34" y="-34" width="68" height="68" color="#CE6470"/><use href="#petal8" x="-23" y="-23" width="46" height="46" color="#A02D40" transform="rotate(22)"/><circle r="8.5" fill="#701728"/></g>
-      <g transform="translate(152 160)"><use href="#petal8" x="-28" y="-28" width="56" height="56" color="#C25A67"/><use href="#petal8" x="-18" y="-18" width="36" height="36" color="#93283A" transform="rotate(22)"/><circle r="7" fill="#6B1424"/></g>
-      <g transform="translate(122 176)"><use href="#petal6" x="-24" y="-24" width="48" height="48" color="#B94E5C"/><use href="#petal6" x="-15" y="-15" width="30" height="30" color="#8E2436" transform="rotate(30)"/><circle r="5" fill="#5E1020"/></g>
-      <g transform="translate(60 190)"><use href="#petal6" x="-16" y="-16" width="32" height="32" color="#D98890"/><circle r="4" fill="#8E2436"/></g>
-      <g transform="translate(180 192)"><use href="#petal6" x="-16" y="-16" width="32" height="32" color="#D98890"/><circle r="4" fill="#8E2436"/></g>
-    </symbol>
-
-    <!-- Лаванда -->
-    <symbol id="bq-lilac" viewBox="0 0 240 290">
-      <ellipse cx="120" cy="272" rx="58" ry="9" fill="rgba(60,40,35,.07)"/>
-      <g stroke="#77866B" stroke-width="2.4" fill="none" stroke-linecap="round">
-        <path d="M120 232 86 148"/><path d="M120 232 104 120"/><path d="M120 232 132 108"/><path d="M120 232 158 140"/><path d="M120 232 170 176"/>
-      </g>
-      <g fill="#A6B394">
-        <ellipse cx="72" cy="168" rx="4" ry="7" transform="rotate(-24 72 168)"/>
-        <ellipse cx="66" cy="182" rx="4" ry="7" transform="rotate(-24 66 182)"/>
-        <ellipse cx="60" cy="196" rx="4" ry="7" transform="rotate(-24 60 196)"/>
-        <ellipse cx="164" cy="164" rx="4" ry="7" transform="rotate(24 164 164)"/>
-        <ellipse cx="170" cy="178" rx="4" ry="7" transform="rotate(24 170 178)"/>
-        <ellipse cx="176" cy="192" rx="4" ry="7" transform="rotate(24 176 192)"/>
-      </g>
-      <path d="M80 170C68 202 66 242 74 264L166 264C174 242 172 202 160 170Z" fill="url(#wrap-b)"/>
-      <path d="M80 170C100 190 140 190 160 170" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2"/>
-      <g transform="translate(84 148)"><use href="#petal8" x="-28" y="-28" width="56" height="56" color="#DCCDEE"/><use href="#petal8" x="-18" y="-18" width="36" height="36" color="#B9A2DB" transform="rotate(22)"/><circle r="7" fill="#8268AE"/></g>
-      <g transform="translate(120 104)"><use href="#petal8" x="-33" y="-33" width="66" height="66" color="#E4D8F2"/><use href="#petal8" x="-22" y="-22" width="44" height="44" color="#C0ACE0" transform="rotate(22)"/><circle r="8.5" fill="#8B72B5"/></g>
-      <g transform="translate(158 140)"><use href="#petal8" x="-27" y="-27" width="54" height="54" color="#DACBEA"/><use href="#petal8" x="-17" y="-17" width="34" height="34" color="#B49BD6" transform="rotate(22)"/><circle r="6.5" fill="#8168AC"/></g>
-      <g transform="translate(112 156)"><use href="#petal6" x="-21" y="-21" width="42" height="42" color="#EFE7F8"/><circle r="5" fill="#A187C8"/></g>
-      <g transform="translate(146 178)"><use href="#petal6" x="-17" y="-17" width="34" height="34" color="#E6DBF3"/><circle r="4" fill="#A187C8"/></g>
-      <g transform="translate(56 192)"><use href="#petal6" x="-15" y="-15" width="30" height="30" color="#E6DBF3"/><circle r="3.5" fill="#A187C8"/></g>
-    </symbol>
-
-    <!-- Бенто -->
-    <symbol id="bq-bento" viewBox="0 0 240 290">
-      <ellipse cx="120" cy="264" rx="70" ry="10" fill="rgba(60,40,35,.08)"/>
-      <path d="M52 176 L188 176 L180 258 L60 258 Z" fill="#EADFD2"/>
-      <path d="M52 176 L188 176 L184 196 L56 196 Z" fill="#F4EBE0"/>
-      <path d="M56 196 L184 196 L180 258 L60 258 Z" fill="none" stroke="rgba(120,95,80,.16)" stroke-width="1.2"/>
-      <path d="M120 196 120 258" stroke="rgba(120,95,80,.18)" stroke-width="1.4"/>
-      <g transform="translate(88 158)"><use href="#petal8" x="-27" y="-27" width="54" height="54" color="#F3D3D8"/><use href="#petal8" x="-17" y="-17" width="34" height="34" color="#E4AEBA" transform="rotate(22)"/><circle r="6.5" fill="#BE7C8D"/></g>
-      <g transform="translate(126 140)"><use href="#petal8" x="-30" y="-30" width="60" height="60" color="#F9E4E7"/><use href="#petal8" x="-19" y="-19" width="38" height="38" color="#EAB6C1" transform="rotate(22)"/><circle r="7.5" fill="#C4808F"/></g>
-      <g transform="translate(160 162)"><use href="#petal6" x="-22" y="-22" width="44" height="44" color="#FBEDEF"/><circle r="5.5" fill="#D5A0AC"/></g>
-      <g color="#8C9A7E">
-        <use href="#leaf" x="62" y="150" width="30" height="15" transform="rotate(-26 77 157)"/>
-        <use href="#leaf" x="150" y="176" width="28" height="14" transform="rotate(20 164 183)"/>
-      </g>
-      <g transform="translate(72 182)"><use href="#petal6" x="-15" y="-15" width="30" height="30" color="#F5E9EA"/><circle r="3.5" fill="#D5A0AC"/></g>
-      <g transform="translate(172 186)"><use href="#petal6" x="-15" y="-15" width="30" height="30" color="#F5E9EA"/><circle r="3.5" fill="#D5A0AC"/></g>
-    </symbol>
-  </defs>
+<svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m2 0v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 22c4.42 0 8-3.58 8-8 0-3.9-2.5-6.6-4.5-8.5C14 4 13 2.5 13 2c-3 2-4 5-4 7-1-.5-1.7-1.5-2-3-2.5 2-3 4.5-3 6.5C4 18.42 7.58 22 12 22z" fill="currentColor"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M8 17V9m5 8V5m5 12v-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 21h8m-4-4v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a1 1 0 0 0-1 1c0 2 1.5 3.5 4 4M17 6h3a1 1 0 0 1 1 1c0 2-1.5 3.5-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow-l" viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.59 13.41 11 3H4v7l9.59 9.59a2 2 0 0 0 2.83 0l4.17-4.17a2 2 0 0 0 0-2.83z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.5" cy="7.5" r=".8" fill="currentColor"/></symbol>
 </svg>
 
-<!-- ============ TOP BAR ============ -->
-<div class="notice">
-  <div class="notice__inner">
-    <span class="notice__demo">Демонстрационная страница · не официальный сайт</span>
-    <span class="notice__meta">
-      <span>Москва, Беломорская, 23</span>
-      <span class="dot"></span>
-      <span>Ежедневно 9:00–21:00</span>
-    </span>
-  </div>
+<div class="app" id="app">
+
+  <header class="topbar">
+    <button class="topbar__btn" id="prevPeriod" aria-label="Предыдущий период"><svg><use href="#i-arrow-l"/></svg></button>
+    <div class="topbar__date">
+      <span class="topbar__month" id="currentMonthLabel">Ноябрь</span>
+      <span class="topbar__year" id="currentYearLabel">2026</span>
+    </div>
+    <button class="topbar__btn" id="nextPeriod" aria-label="Следующий период"><svg><use href="#i-arrow-r"/></svg></button>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab is-active" data-view="today" role="tab" aria-selected="true">
+      <svg><use href="#i-check"/></svg><span>Сегодня</span>
+    </button>
+    <button class="tab" data-view="calendar" role="tab" aria-selected="false">
+      <svg><use href="#i-calendar"/></svg><span>Календарь</span>
+    </button>
+    <button class="tab" data-view="stats" role="tab" aria-selected="false">
+      <svg><use href="#i-chart"/></svg><span>Статистика</span>
+    </button>
+    <button class="tab" data-view="awards" role="tab" aria-selected="false">
+      <svg><use href="#i-trophy"/></svg><span>Награды</span>
+    </button>
+  </nav>
+
+  <section class="view is-active" id="view-today">
+    <div class="strip">
+      <div class="strip__item">
+        <svg class="strip__icon"><use href="#i-fire"/></svg>
+        <div><strong id="sumStreak">0</strong><span>дней подряд</span></div>
+      </div>
+      <div class="strip__item">
+        <svg class="strip__icon"><use href="#i-target"/></svg>
+        <div><strong id="sumToday">0/0</strong><span>сегодня</span></div>
+      </div>
+      <div class="strip__item">
+        <svg class="strip__icon"><use href="#i-lock"/></svg>
+        <div><strong id="sumLock">0</strong><span>блокировок</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__head">
+        <h2>Эта неделя</h2>
+        <span class="card__sub" id="weekRange"></span>
+      </div>
+      <div class="weekchart" id="weekChart"></div>
+    </div>
+
+    <div class="card">
+      <div class="card__head">
+        <h2>Мои привычки</h2>
+        <span class="card__sub" id="habitsCount">0</span>
+      </div>
+      <div class="habits" id="habitsContainer"></div>
+      <p class="empty" id="emptyHabits">Начните с добавления первой привычки</p>
+    </div>
+
+    <button class="fab" id="openAddModal" aria-label="Добавить привычку">
+      <svg><use href="#i-plus"/></svg>
+    </button>
+  </section>
+
+  <section class="view" id="view-calendar">
+    <div class="card">
+      <div class="card__head"><h2 id="calTitle">Ноябрь 2026</h2></div>
+      <div class="cal" id="calendarGrid"></div>
+      <div class="cal-legend">
+        <span class="cal-legend__item"><span class="cal-legend__dot cal-legend__dot--none"></span> нет данных</span>
+        <span class="cal-legend__item"><span class="cal-legend__dot cal-legend__dot--partial"></span> частично</span>
+        <span class="cal-legend__item"><span class="cal-legend__dot cal-legend__dot--full"></span> всё выполнено</span>
+      </div>
+    </div>
+    <div class="card" id="dayDetailCard" hidden>
+      <div class="card__head">
+        <h2 id="dayDetailTitle">День</h2>
+        <button class="iconbtn" id="closeDayDetail" aria-label="Закрыть"><svg><use href="#i-x"/></svg></button>
+      </div>
+      <div class="daydetail" id="dayDetailList"></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-stats">
+    <div class="card">
+      <div class="card__head"><h2>Общая статистика</h2></div>
+      <div class="statgrid">
+        <div class="statgrid__item"><span class="statgrid__value" id="stTotal">0</span><span class="statgrid__label">выполнений</span></div>
+        <div class="statgrid__item"><span class="statgrid__value" id="stRate">0%</span><span class="statgrid__label">выполнение</span></div>
+        <div class="statgrid__item"><span class="statgrid__value" id="stBest">0</span><span class="statgrid__label">лучший стрик</span></div>
+        <div class="statgrid__item"><span class="statgrid__value" id="stAvg">0%</span><span class="statgrid__label">в среднем</span></div>
+        <div class="statgrid__item"><span class="statgrid__value" id="stLocks">0</span><span class="statgrid__label">блокировок</span></div>
+        <div class="statgrid__item"><span class="statgrid__value" id="stLevel">1</span><span class="statgrid__label">уровень</span></div>
+      </div>
+    </div>
+    <div class="card"><div class="card__head"><h2>По категориям</h2></div><div class="catstats" id="catStats"></div></div>
+    <div class="card"><div class="card__head"><h2>Топ привычек</h2></div><div class="toplist" id="topList"></div></div>
+    <div class="card"><div class="card__head"><h2>Последние 30 дней</h2></div><div class="monthchart" id="monthChart"></div></div>
+  </section>
+
+  <section class="view" id="view-awards">
+    <div class="card profile">
+      <div class="profile__avatar" id="levelAvatar">1</div>
+      <div class="profile__info">
+        <strong id="levelName">Новичок</strong>
+        <span id="levelXP">0 / 100 XP</span>
+      </div>
+      <div class="profile__bar"><div class="profile__fill" id="levelFill"></div></div>
+    </div>
+    <div class="card">
+      <div class="card__head"><h2>Достижения</h2></div>
+      <div class="awards" id="awardsGrid"></div>
+    </div>
+  </section>
+
+  <button class="iconbtn floating-settings" id="openSettings" aria-label="Настройки">
+    <svg><use href="#i-settings"/></svg>
+  </button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </div>
 
-<!-- ============ HEADER ============ -->
-<header class="header" id="header">
-  <div class="header__inner">
-    <a class="logo" href="#top" aria-label="Мне Букет — на главную">
-      <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true">
-        <g fill="#B5455A">
-          <ellipse cx="20" cy="10" rx="4.4" ry="7.6"/>
-          <ellipse cx="20" cy="30" rx="4.4" ry="7.6"/>
-          <ellipse cx="10" cy="20" rx="7.6" ry="4.4"/>
-          <ellipse cx="30" cy="20" rx="7.6" ry="4.4"/>
-          <ellipse cx="13" cy="13" rx="4.4" ry="7.6" transform="rotate(-45 13 13)"/>
-          <ellipse cx="27" cy="27" rx="4.4" ry="7.6" transform="rotate(-45 27 27)"/>
-          <ellipse cx="27" cy="13" rx="4.4" ry="7.6" transform="rotate(45 27 13)"/>
-          <ellipse cx="13" cy="27" rx="4.4" ry="7.6" transform="rotate(45 13 27)"/>
-        </g>
-        <circle cx="20" cy="20" r="4.6" fill="#221E1B"/>
-      </svg>
-      <span class="logo__text">Мне Букет<sup>*</sup></span>
-    </a>
-
-    <nav class="nav" id="nav" aria-label="Основная навигация">
-      <a href="#catalog">Каталог</a>
-      <a href="#why">Почему мы</a>
-      <a href="#order">Заказ</a>
-      <a href="#contacts">Контакты</a>
-    </nav>
-
-    <div class="header__actions">
-      <a class="header__phone" href="tel:+79690699609">+7 969 069-96-09</a>
-      <a class="btn btn--primary btn--sm" href="#order">Заказать</a>
-      <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav">
-        <span></span><span></span>
-      </button>
+<div class="overlay" id="habitModal" aria-hidden="true">
+  <div class="sheet">
+    <div class="sheet__handle"></div>
+    <div class="sheet__head">
+      <h2 id="habitModalTitle">Новая привычка</h2>
+      <button class="iconbtn" id="closeHabitModal" aria-label="Закрыть"><svg><use href="#i-x"/></svg></button>
     </div>
-  </div>
-</header>
-
-<main id="top">
-
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="wrap hero__grid">
-      <div class="hero__copy">
-        <p class="eyebrow"><span class="eyebrow__line"></span>Цветочная мастерская · Москва</p>
-        <h1 class="hero__title">
-          Букет&nbsp;— это<br>
-          <em>слова</em>, которые<br>
-          не нужно говорить
-        </h1>
-        <p class="hero__lead">Монобукеты и авторские композиции. Собираем при вас, показываем фото перед отправкой и везём аккуратно.</p>
-        <div class="hero__cta">
-          <a class="btn btn--primary" href="#catalog">Смотреть каталог</a>
-          <a class="btn btn--ghost" href="#order">Собрать букет</a>
-        </div>
-        <dl class="hero__facts">
-          <div><dt>Ежедневно</dt><dd>9:00–21:00</dd></div>
-          <div><dt>Доставка</dt><dd>от 1 часа</dd></div>
-          <div><dt>Свежесть</dt><dd>поставка утром</dd></div>
-        </dl>
-      </div>
-
-      <div class="hero__art">
-        <div class="hero__panel">
-          <svg class="hero__bouquet" viewBox="0 0 240 290" role="img" aria-label="Букет из розовых пионов">
-            <use href="#bq-pink"/>
-          </svg>
-          <span class="hero__ring hero__ring--one" aria-hidden="true"></span>
-          <span class="hero__ring hero__ring--two" aria-hidden="true"></span>
-        </div>
-        <div class="float-card float-card--price">
-          <span class="float-card__label">Авторский букет</span>
-          <strong>от 3 500 ₽</strong>
-        </div>
-        <div class="float-card float-card--photo">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2h6l2 2h3v12H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-          <span>Фото перед<br>вручением</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="strip">
-      <div class="wrap strip__inner">
-        <div class="strip__item"><span class="strip__num">01</span><span>Сборка при вас</span></div>
-        <div class="strip__item"><span class="strip__num">02</span><span>Доставка по району</span></div>
-        <div class="strip__item"><span class="strip__num">03</span><span>Фото до отправки</span></div>
-        <div class="strip__item"><span class="strip__num">04</span><span>Оплата при получении</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CATALOG ============ -->
-  <section class="section" id="catalog">
-    <div class="wrap">
-      <header class="section__head reveal">
-        <div>
-          <p class="eyebrow"><span class="eyebrow__line"></span>01 — Каталог</p>
-          <h2 class="section__title">Что можно заказать</h2>
-        </div>
-        <p class="section__note">Цены в примере ориентировочные — на настоящем сайте заменяются на актуальные. Ниже — пять форматов, которые закрывают почти любой повод.</p>
-      </header>
-
-      <div class="catalog">
-
-        <article class="card reveal" data-bouquet="Монобукет из кустовых роз">
-          <div class="card__art card__art--pink">
-            <span class="badge">Хит</span>
-            <svg viewBox="0 0 240 290" aria-hidden="true"><use href="#bq-pink"/></svg>
-          </div>
-          <div class="card__body">
-            <div class="card__top">
-              <h3 class="card__title">Монобукет из кустовых роз</h3>
-              <span class="card__idx">01</span>
-            </div>
-            <p class="card__desc">15–25 побегов, упаковка в цвет. Плотный, ароматный, без лишнего декора.</p>
-            <div class="card__foot">
-              <span class="price">от 2 800 ₽</span>
-              <button class="btn btn--line btn--sm js-order" type="button">Выбрать</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal" data-bouquet="Авторский букет">
-          <div class="card__art card__art--white">
-            <svg viewBox="0 0 240 290" aria-hidden="true"><use href="#bq-white"/></svg>
-          </div>
-          <div class="card__body">
-            <div class="card__top">
-              <h3 class="card__title">Авторский букет</h3>
-              <span class="card__idx">02</span>
-            </div>
-            <p class="card__desc">Собираем под повод и характер: пастель, сезонные акценты, зелень.</p>
-            <div class="card__foot">
-              <span class="price">от 3 500 ₽</span>
-              <button class="btn btn--line btn--sm js-order" type="button">Выбрать</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal" data-bouquet="Бенто-бокс с цветами">
-          <div class="card__art card__art--bento">
-            <span class="badge badge--new">Новинка</span>
-            <svg viewBox="0 0 240 290" aria-hidden="true"><use href="#bq-bento"/></svg>
-          </div>
-          <div class="card__body">
-            <div class="card__top">
-              <h3 class="card__title">Бенто-бокс с цветами</h3>
-              <span class="card__idx">03</span>
-            </div>
-            <p class="card__desc">Компактно, для офиса и учёбы. Внутри — место для записки.</p>
-            <div class="card__foot">
-              <span class="price">от 3 200 ₽</span>
-              <button class="btn btn--line btn--sm js-order" type="button">Выбрать</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal" data-bouquet="Букет ко дню рождения">
-          <div class="card__art card__art--sun">
-            <svg viewBox="0 0 240 290" aria-hidden="true"><use href="#bq-sun"/></svg>
-          </div>
-          <div class="card__body">
-            <div class="card__top">
-              <h3 class="card__title">Букет ко дню рождения</h3>
-              <span class="card__idx">04</span>
-            </div>
-            <p class="card__desc">Яркое сочетание сезонных цветов, открытка в подарок.</p>
-            <div class="card__foot">
-              <span class="price">от 2 500 ₽</span>
-              <button class="btn btn--line btn--sm js-order" type="button">Выбрать</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal" data-bouquet="Букет в бордовых тонах">
-          <div class="card__art card__art--red">
-            <span class="badge">Вечер</span>
-            <svg viewBox="0 0 240 290" aria-hidden="true"><use href="#bq-red"/></svg>
-          </div>
-          <div class="card__body">
-            <div class="card__top">
-              <h3 class="card__title">Букет в бордовых тонах</h3>
-              <span class="card__idx">05</span>
-            </div>
-            <p class="card__desc">Тёмная роза, глубокий оттенок, строгая упаковка. Для вечера и свидания.</p>
-            <div class="card__foot">
-              <span class="price">от 3 900 ₽</span>
-              <button class="btn btn--line btn--sm js-order" type="button">Выбрать</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card card--promo reveal">
-          <span class="promo__label">Не знаете, что выбрать?</span>
-          <h3 class="promo__title">Соберём букет<br>под ваш бюджет</h3>
-          <p class="promo__text">Напишите повод и сумму — предложим 2–3 варианта с фото и ценой.</p>
-          <a class="btn btn--light btn--sm" href="#order">Подобрать букет</a>
-        </article>
-
-        <article class="card card--event reveal">
-          <div class="card__art card__art--lilac">
-            <span class="badge badge--light">Под заказ</span>
-            <svg viewBox="0 0 240 290" aria-hidden="true"><use href="#bq-lilac"/></svg>
-          </div>
-          <div class="card__body">
-            <div class="card__top">
-              <span class="card__eyebrow">06 — событие</span>
-            </div>
-            <h3 class="card__title card__title--lg">Оформление события</h3>
-            <p class="card__desc">Фото-зона, банкетные столы, подарок маме или коллеге. Обсуждаем задачу и собираем смету — без шаблонных решений.</p>
-            <div class="card__foot">
-              <span class="price">по договорённости</span>
-              <button class="btn btn--primary btn--sm js-order" type="button">Обсудить</button>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ WHY ============ -->
-  <section class="section section--alt" id="why">
-    <div class="wrap">
-      <header class="section__head reveal">
-        <div>
-          <p class="eyebrow"><span class="eyebrow__line"></span>02 — Почему мы</p>
-          <h2 class="section__title">Три вещи, которые важны</h2>
-        </div>
-      </header>
-
-      <div class="why">
-        <article class="why__item reveal">
-          <span class="why__num">01</span>
-          <h3>Свежесть</h3>
-          <p>Поставка цветов утром — букет живёт долго, а не «до вечера». Если что-то не так, заменим без вопросов.</p>
-        </article>
-        <article class="why__item reveal">
-          <span class="why__num">02</span>
-          <h3>Сборка при вас</h3>
-          <p>Фото букета перед отправкой — вы видите, что именно едет к получателю. Никаких сюрпризов в коробке.</p>
-        </article>
-        <article class="why__item reveal">
-          <span class="why__num">03</span>
-          <h3>Доставка по району</h3>
-          <p>Везём аккуратно и вовремя: к празднику, учёбе или просто так. Согласуем время в переписке.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ ORDER ============ -->
-  <section class="section" id="order">
-    <div class="wrap order">
-      <div class="order__copy reveal">
-        <p class="eyebrow"><span class="eyebrow__line"></span>03 — Заказ</p>
-        <h2 class="section__title">Напишите —<br>предложим букет под повод</h2>
-        <p class="order__text">Достаточно имени и телефона. Остальное уточним: повод, бюджет, время и адрес. Или сразу в Telegram, если удобнее переписка.</p>
-        <a class="link-arrow" href="https://t.me/mnebuketflowers" target="_blank" rel="noopener">
-          Написать в Telegram
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <ul class="order__points">
-          <li>Отвечаем в течение 15 минут</li>
-          <li>Оплата при получении</li>
-          <li>Фото букета до отправки</li>
-        </ul>
-      </div>
-
-      <form class="form reveal" id="orderForm" novalidate>
-        <div class="form__row">
-          <label class="field">
-            <span class="field__label">Имя</span>
-            <input type="text" name="name" id="f-name" placeholder="Как к вам обращаться" autocomplete="name" required>
-            <span class="field__err">Подскажите, как к вам обращаться</span>
-          </label>
-        </div>
-        <div class="form__row">
-          <label class="field">
-            <span class="field__label">Телефон</span>
-            <input type="tel" name="phone" id="f-phone" placeholder="+7 900 000-00-00" autocomplete="tel" inputmode="tel" required>
-            <span class="field__err">Нужен телефон для связи</span>
-          </label>
-        </div>
-        <div class="form__row">
-          <label class="field">
-            <span class="field__label">Что нужно</span>
-            <select name="bouquet" id="f-bouquet">
-              <option>Монобукет из кустовых роз</option>
-              <option>Авторский букет</option>
-              <option>Бенто-бокс с цветами</option>
-              <option>Букет ко дню рождения</option>
-              <option>Букет в бордовых тонах</option>
-              <option>Оформление события</option>
-              <option>Пока не знаю — подскажите</option>
-            </select>
-          </label>
-        </div>
-        <div class="form__row form__row--split">
-          <label class="field">
-            <span class="field__label">Когда</span>
-            <input type="text" name="date" id="f-date" placeholder="Сегодня, к 18:00">
-          </label>
-          <label class="field">
-            <span class="field__label">Бюджет</span>
-            <select name="budget" id="f-budget">
-              <option>до 3 000 ₽</option>
-              <option selected>3 000–5 000 ₽</option>
-              <option>5 000–8 000 ₽</option>
-              <option>больше 8 000 ₽</option>
-            </select>
-          </label>
-        </div>
-        <button class="btn btn--primary btn--block" type="submit">Заказать букет</button>
-        <p class="form__note">Это пример формы: данные никуда не отправляются.</p>
-        <div class="form__success" id="formSuccess" role="status" aria-live="polite">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div>
-            <strong>Заявка отправлена</strong>
-            <span>Свяжемся в течение 15 минут и уточним детали.</span>
-          </div>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- ============ CONTACTS ============ -->
-  <section class="section section--contacts" id="contacts">
-    <div class="wrap">
-      <div class="contacts">
-        <div class="contacts__head reveal">
-          <p class="eyebrow eyebrow--light"><span class="eyebrow__line"></span>04 — Контакты</p>
-          <h2 class="section__title section__title--light">Заходите<br>за цветами</h2>
-          <p class="contacts__text">Можно приехать и собрать букет на месте — или заказать доставку по району.</p>
-        </div>
-        <div class="contacts__grid reveal">
-          <div class="contact-card">
-            <span class="contact-card__label">Адрес</span>
-            <span class="contact-card__value">Москва,<br>ул. Беломорская, 23</span>
-          </div>
-          <div class="contact-card">
-            <span class="contact-card__label">Телефон</span>
-            <a class="contact-card__value" href="tel:+79690699609">+7 969 069-96-09</a>
-          </div>
-          <div class="contact-card">
-            <span class="contact-card__label">Telegram</span>
-            <a class="contact-card__value" href="https://t.me/mnebuketflowers" target="_blank" rel="noopener">@mnebuketflowers</a>
-          </div>
-          <div class="contact-card">
-            <span class="contact-card__label">Часы работы</span>
-            <span class="contact-card__value">Ежедневно<br>9:00–21:00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer class="footer">
-  <div class="wrap footer__inner">
-    <div class="footer__brand">
-      <a class="logo logo--footer" href="#top">
-        <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true">
-          <g fill="#E9A3AE">
-            <ellipse cx="20" cy="10" rx="4.4" ry="7.6"/>
-            <ellipse cx="20" cy="30" rx="4.4" ry="7.6"/>
-            <ellipse cx="10" cy="20" rx="7.6" ry="4.4"/>
-            <ellipse cx="30" cy="20" rx="7.6" ry="4.4"/>
-          </g>
-          <circle cx="20" cy="20" r="4.6" fill="#FAF6F2"/>
-        </svg>
-        <span class="logo__text">Мне Букет<sup>*</sup></span>
-      </a>
-      <p class="footer__note">Цветы, которые говорят за вас.</p>
-    </div>
-    <nav class="footer__nav" aria-label="Навигация в подвале">
-      <a href="#catalog">Каталог</a>
-      <a href="#why">Почему мы</a>
-      <a href="#order">Заказ</a>
-      <a href="#contacts">Контакты</a>
-    </nav>
-    <p class="footer__legal">© 2026 Мне Букет*<br>Пример страницы, сделанный как демо.</p>
-  </div>
-</footer>
-
-<!-- ============ HABIT TRACKER ============ -->
-<section class="section section--alt" id="habit-tracker">
-  <div class="wrap">
-    <div class="habit-tracker">
-      <div class="habit-tracker__header reveal">
-        <div>
-          <p class="eyebrow"><span class="eyebrow__line"></span>05 — Привычки</p>
-          <h2 class="section__title">Трекер привычек</h2>
-          <p class="section__note">Отслеживайте свои ежедневные привычки и следите за стаканем</p>
-        </div>
-        <div class="habit-tracker__actions">
-          <button class="btn btn--secondary btn--sm" id="habit-add-btn">Добавить привычку</button>
-        </div>
-      </div>
-
-      <div class="habit-tracker__habits" id="habit-habits">
-        <!-- Привычки будут добавлены здесь динамически -->
-        <div class="habit-state__empty">
-          <p>Начните с добавления первой привычки</p>
-        </div>
-      </div>
-
-      <div class="habit-tracker__summary reveal" id="habit-summary">
-        <div class="summary-item">
-          <span class="summary-label">Текущий streak</span>
-          <strong class="summary-value" id="habit-current-streak">0</strong> дней
-        </div>
-        <div class="summary-item">
-          <span class="summary-label">Всего дней</span>
-          <strong class="summary-value" id="habit-total-days">0</strong>
-        </div>
-        <div class="summary-item">
-          <span class="summary-label">Процент выполнения</span>
-          <strong class="summary-value" id="habit-percent">0%</strong>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Модальное окно добавления привычки -->
-<div class="habit-modal" id="habit-modal" aria-hidden="true">
-  <div class="habit-modal__container">
-    <button class="habit-modal__close" aria-label="Закрыть" id="habit-modal-close">&times;</button>
-    <h3 class="habit-modal__title">Добавить привычку</h3>
-    <form class="habit-modal__form" id="habit-form">
-      <div class="habit-modal__row">
-        <label class="field">
-          <span class="field__label">Название привычки</span>
-          <input type="text" name="name" id="habit-name" placeholder="например: Чтение книги" required>
-        </label>
-      </div>
-      <div class="habit-modal__row habit-modal__row--period">
+    <form class="sheet__form" id="habitForm">
+      <input type="hidden" id="habitId">
+      <label class="field">
+        <span class="field__label">Название</span>
+        <input type="text" id="fName" placeholder="например: Чтение книги" required maxlength="60">
+      </label>
+      <label class="field">
+        <span class="field__label">Описание / цель</span>
+        <input type="text" id="fGoal" placeholder="например: 20 страниц в день" maxlength="120">
+      </label>
+      <div class="field-row">
         <label class="field">
           <span class="field__label">Периодичность</span>
-          <select name="period" id="habit-period" required>
+          <select id="fPeriod">
             <option value="daily">Ежедневно</option>
             <option value="weekly">Еженедельно</option>
             <option value="monthly">Ежемесячно</option>
+            <option value="custom">По дням недели</option>
+          </select>
+        </label>
+        <label class="field" id="weekdaysField" hidden>
+          <span class="field__label">Дни недели</span>
+          <div class="weekdays" id="weekdaysPicker">
+            <button type="button" class="wd" data-wd="1">Пн</button>
+            <button type="button" class="wd" data-wd="2">Вт</button>
+            <button type="button" class="wd" data-wd="3">Ср</button>
+            <button type="button" class="wd" data-wd="4">Чт</button>
+            <button type="button" class="wd" data-wd="5">Пт</button>
+            <button type="button" class="wd" data-wd="6">Сб</button>
+            <button type="button" class="wd" data-wd="0">Вс</button>
+          </div>
+        </label>
+      </div>
+      <div class="field-row">
+        <label class="field">
+          <span class="field__label">Категория</span>
+          <select id="fCategory">
+            <option value="health">Здоровье</option>
+            <option value="sport">Спорт</option>
+            <option value="study">Учёба</option>
+            <option value="work">Работа</option>
+            <option value="mind">Осознанность</option>
+            <option value="social">Общение</option>
+            <option value="creative">Творчество</option>
+            <option value="finance">Финансы</option>
+            <option value="other">Другое</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label">Приоритет</span>
+          <select id="fPriority">
+            <option value="high">Высокий</option>
+            <option value="medium" selected>Средний</option>
+            <option value="low">Низкий</option>
           </select>
         </label>
       </div>
-      <div class="habit-modal__row">
+      <label class="field">
+        <span class="field__label">Цвет метки</span>
+        <div class="colors" id="colorPicker">
+          <button type="button" class="color is-active" data-color="#111111" style="--c:#111111"></button>
+          <button type="button" class="color" data-color="#444444" style="--c:#444444"></button>
+          <button type="button" class="color" data-color="#888888" style="--c:#888888"></button>
+          <button type="button" class="color" data-color="#bbbbbb" style="--c:#bbbbbb"></button>
+          <button type="button" class="color" data-color="#e0e0e0" style="--c:#e0e0e0"></button>
+        </div>
+      </label>
+      <div class="field-row">
         <label class="field">
-          <span class="field__label">Цель (опционально)</span>
-          <input type="text" name="goal" id="habit-goal" placeholder="например: 20 страниц в день">
+          <span class="field__label">Блокировка при пропуске (мин)</span>
+          <input type="number" id="fLock" min="0" max="1440" value="30">
+        </label>
+        <label class="field">
+          <span class="field__label">Напоминание (время)</span>
+          <input type="time" id="fReminder" value="20:00">
+          <span class="field__hint">Оставьте пустым, чтобы выключить</span>
         </label>
       </div>
-      <button class="btn btn--primary btn--block" type="submit">Сохранить привычку</button>
+      <label class="field">
+        <span class="field__label">Заметка (необязательно)</span>
+        <textarea id="fNote" rows="2" maxlength="300" placeholder="Любая заметка…"></textarea>
+      </label>
+      <div class="sheet__actions">
+        <button type="submit" class="btn btn--primary btn--block">Сохранить</button>
+      </div>
     </form>
   </div>
 </div>
 
-<a class="fab" href="#habit-tracker" target="_blank" rel="noopener" aria-label="Открыть трекер привычек">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4 3 11l6 2 2 6 3-4 5 3z" fill="currentColor"/></svg>
-</a>
+<div class="overlay" id="settingsModal" aria-hidden="true">
+  <div class="sheet">
+    <div class="sheet__handle"></div>
+    <div class="sheet__head">
+      <h2>Настройки</h2>
+      <button class="iconbtn" id="closeSettings" aria-label="Закрыть"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet__body settings">
+      <div class="setting">
+        <div class="setting__info"><strong>Тема оформления</strong><span>Выберите внешний вид приложения</span></div>
+        <select id="setTheme"><option value="mono">Чёрно-белая</option><option value="paper">Бумага</option><option value="night">Ночь</option></select>
+      </div>
+      <div class="setting">
+        <div class="setting__info"><strong>Уведомления</strong><span>Разрешить напоминания</span></div>
+        <label class="switch"><input type="checkbox" id="setNotify"><span class="switch__track"></span></label>
+      </div>
+      <div class="setting">
+        <div class="setting__info"><strong>Время блокировки по умолчанию</strong><span>Минуты при пропуске привычки</span></div>
+        <input type="number" id="setLockDefault" min="0" max="1440" value="30">
+      </div>
+      <div class="setting">
+        <div class="setting__info"><strong>Время суток для блокировки</strong><span>Час, после которого блокировать</span></div>
+        <input type="time" id="setLockHour" value="20:00">
+      </div>
+      <div class="setting-actions">
+        <button class="btn btn--outline" id="exportBtn"><svg><use href="#i-download"/></svg> Экспорт данных</button>
+        <button class="btn btn--outline" id="importBtn"><svg><use href="#i-upload"/></svg> Импорт данных</button>
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </div>
+      <div class="setting-actions"><button class="btn btn--danger" id="resetBtn">Сбросить все данные</button></div>
+      <p class="settings__version">HabitFlow v2.0 · данные хранятся локально</p>
+    </div>
+  </div>
+</div>
 
-<script src="script.js"></script>
+<div class="lockscreen" id="lockScreen" aria-hidden="true">
+  <div class="lockscreen__inner">
+    <div class="lockscreen__icon"><svg><use href="#i-lock"/></svg></div>
+    <h2>Привычка не выполнена</h2>
+    <p>Вы не отметили <strong id="lockHabitName"></strong>.<br>Телефон заблокирован на <strong id="lockMinutes"></strong> мин.</p>
+    <div class="lockscreen__timer" id="lockTimer">00:00</div>
+    <button class="btn btn--primary lockscreen__btn" id="lockConfirm" disabled>Понятно</button>
+    <p class="lockscreen__hint">Это помогает не пропускать привычки в будущем</p>
+  </div>
+</div>
+
+<div class="overlay" id="detailModal" aria-hidden="true">
+  <div class="sheet sheet--detail">
+    <div class="sheet__handle"></div>
+    <div class="sheet__head">
+      <h2 id="detailTitle">Привычка</h2>
+      <button class="iconbtn" id="closeDetail" aria-label="Закрыть"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet__body" id="detailBody"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
